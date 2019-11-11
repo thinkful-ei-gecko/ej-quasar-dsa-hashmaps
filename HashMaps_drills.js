@@ -24,6 +24,13 @@ function main() {
 
   const dupString = 'google all that you can think of';
   console.log(removeDup(dupString));
+
+  // input: as above
+  // output: an array but with like hobbit
+  // Key: hobbit, value: "Frodo", next: 'Bilbo' {
+  //   value: bilbo, next: alex { }
+  // }
+
 }
 
 const WhatDoesThisDo = function() {
@@ -63,3 +70,93 @@ const removeDup = function(string) {
 
 main();
 // WhatDoesThisDo();
+
+
+// Q5. Permutationn a Palinndrome
+
+function palindrome(string){
+  let map = new HashMap();
+  let count = 0;
+  for (let i = 0; i < string.length; i++){
+    map.set(i, string[i])
+    count++;
+  }
+
+  if (count % 2 === 0){
+
+    for (let i = 0; i < string.length; i++){
+      let letterCounter = 0;
+      // if it is odd will return false
+      let letter = map.get(i)
+        for(let j = 0; j < string.length; j++){
+          if(letter === map.get(j)){
+            letterCounter++
+          }
+        }
+
+        if (letterCounter % 2 !== 0){
+          return false;
+        }
+    }
+  
+    return true;
+  } else {
+    let odd = 0;
+    for (let i = 0; i < string.length; i++){
+      let letterCounter = 0;
+      let letter = map.get(i)
+
+      for (let j = 0; j < string.length; j++){
+        if(letter === map.get(j)){
+          letterCounter++
+        }
+      }
+
+      if(letterCounter % 2 !== 0) {
+        odd++
+      }
+    }
+
+    if (odd % 2 <= 1){
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+}
+
+console.log(palindrome('pagoda'))
+
+
+// Q6. Anagram
+
+function Anagram(array){
+
+  const groups = new Map();
+
+  array.forEach(wrd => {
+    const word = wrd.split('').sort().join('');
+
+    const group = groups.get(word) || []
+
+    groups.set(word, [...group, wrd])
+
+  })
+
+  return Array.from(groups.values())
+}
+
+console.log(Anagram(
+  ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']
+  ))
+
+
+// Q7. Hash Maps with Linked Lists
+
+// Pseudo Code
+
+// have a hash map
+// when two compare equal make new linked lists
+// link all hobbits for example
