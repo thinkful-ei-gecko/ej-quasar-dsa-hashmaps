@@ -1,13 +1,13 @@
 'use strict';
 class _Node {
-  constructor(value, next){
+  constructor(value, next) {
     this.value = value;
     this.next = next;
   }
 }
 
 class LinkedList {
-  constructor(){ 
+  constructor() {
     this.head = null;
   }
 
@@ -18,17 +18,16 @@ class LinkedList {
   insertLast(item) {
     if (this.head === null) {
       this.insertFirst(item);
-    }
-    else {
+    } else {
       let tempNode = this.head;
-      while (tempNode.next !== null) { 
-        tempNode = tempNode.next; 
+      while (tempNode.next !== null) {
+        tempNode = tempNode.next;
       }
-      tempNode.next = new _Node(item, null); 
+      tempNode.next = new _Node(item, null);
     }
   }
 
-  find(item) { 
+  find(item) {
     let currNode = this.head;
     if (!this.head) {
       return null;
@@ -36,15 +35,14 @@ class LinkedList {
     while (currNode.value !== item) {
       if (currNode.next === null) {
         return null;
-      }
-      else {
+      } else {
         currNode = currNode.next;
       }
     }
     return currNode;
   }
 
-  remove(item){ 
+  remove(item) {
     if (!this.head) {
       return null;
     }
@@ -55,7 +53,7 @@ class LinkedList {
     let currNode = this.head;
     let previousNode = this.head;
 
-    while ((currNode !== undefined) && (currNode.value !== item)) {
+    while (currNode !== undefined && currNode.value !== item) {
       previousNode = currNode;
       currNode = currNode.next;
     }
@@ -66,38 +64,36 @@ class LinkedList {
     previousNode.next = currNode.next;
   }
 
-  insertBefore(item, target){
+  insertBefore(item, target) {
     let currNode = this.head;
     let previousNode = this.head;
     let currTarget = 0;
     let newNode = new _Node(item);
-    
-    if(target === 0){
+
+    if (target === 0) {
       newNode.next = currNode;
       this.head = newNode;
-    }
-    
-    else while(currTarget < target){
-      currTarget++;
-      previousNode = currNode;
-      currNode = currNode.next;
-    }
+    } else
+      while (currTarget < target) {
+        currTarget++;
+        previousNode = currNode;
+        currNode = currNode.next;
+      }
     newNode.next = currNode;
     previousNode.next = newNode;
-
   }
 
-  insertAfter(item, target){
+  insertAfter(item, target) {
     let currNode = this.head;
     let currTarget = 0;
     let newNode = new _Node(item);
-    
+
     // if(currTarget > 0){
     //   newNode.next = currNode;
     //   this.head = newNode
     // }
-    
-    while(currTarget < target){
+
+    while (currTarget < target) {
       currTarget++;
       currNode = currNode.next;
     }
@@ -105,13 +101,13 @@ class LinkedList {
     currNode.next = newNode;
   }
 
-  insertAt(item, target){
+  insertAt(item, target) {
     let currNode = this.head;
     let previousNode = this.head;
     let currTarget = 0;
     let newNode = new _Node(item);
 
-    while (currTarget < target){
+    while (currTarget < target) {
       currTarget++;
       previousNode = currNode;
       currNode = currNode.next;
@@ -119,54 +115,52 @@ class LinkedList {
 
     previousNode.next = newNode;
     newNode.next = currNode;
-
   }
 
-  insert(item){
+  insert(item) {
     let currNode = this.head;
     let newNode = new _Node(item);
-    if(this.head === null){
+    if (this.head === null) {
       this.head = newNode;
-    }
-    else{
-      while(currNode.next){
+    } else {
+      while (currNode.next) {
         currNode = currNode.next;
       }
       currNode.next = newNode;
     }
   }
-}  
-
-//Q3: Supplemental functions for a linked list
-function display(list){
-  let result = JSON.stringify(list); 
-  return result; 
 }
 
-function size(list){
+//Q3: Supplemental functions for a linked list
+function display(list) {
+  let result = JSON.stringify(list);
+  return result;
+}
+
+function size(list) {
   let currNode = list.head;
   let size = 0;
-  while(currNode !== undefined){
+  while (currNode !== undefined) {
     currNode = currNode.next;
     size++;
   }
-  return size; 
+  return size;
 }
 
-function isEmpty(list){
-  if(list.head === undefined){
+function isEmpty(list) {
+  if (list.head === undefined) {
     return console.log('is empty');
   }
-  return console.log('list present'); 
+  return console.log('list present');
 }
 
-function findPrevious(list, item){
+function findPrevious(list, item) {
   let currNode = list.head;
   let previousNode = list.head;
   //let counter = 0;
   let result;
 
-  while(currNode.value !== item){
+  while (currNode.value !== item) {
     previousNode = currNode;
     currNode = currNode.next;
   }
@@ -174,10 +168,10 @@ function findPrevious(list, item){
   return console.log(result);
 }
 
-function findLast(list){
+function findLast(list) {
   let currNode = list.head;
   let previousNode = list.head;
-  while(currNode !== undefined){
+  while (currNode !== undefined) {
     previousNode = currNode;
     currNode = currNode.next;
   }
@@ -186,13 +180,12 @@ function findLast(list){
 
 // Q5. Reverse a List
 
-function Reverse(list){
-
+function Reverse(list) {
   let currNode = list.head;
   let previousNode = null;
   let tempNode = null;
 
-  while(currNode !== undefined){
+  while (currNode !== undefined) {
     tempNode = currNode.next; // 1st case === "Athena"
     currNode.next = previousNode; // "Athena" => null
     previousNode = currNode; // null => Apollo
@@ -206,7 +199,7 @@ function Reverse(list){
 }
 
 //Q6: 3rd from the end
-function thirdFromTheEnd(list){
+function thirdFromTheEnd(list) {
   // let previousNode = list.head;
   // let secondNode = null;
   // let thirdNode = null;
@@ -218,9 +211,9 @@ function thirdFromTheEnd(list){
   //   currNode = currNode.next;
   // }
   // return console.log(`Third from the end: '${thirdNode.value}'`);
-  let currNode =  list.head;
+  let currNode = list.head;
 
-  while(currNode.next.next.next !== undefined){
+  while (currNode.next.next.next !== undefined) {
     currNode = currNode.next;
   }
   let result = JSON.stringify(currNode);
@@ -228,47 +221,43 @@ function thirdFromTheEnd(list){
 }
 
 //Q7: Middle of a list
-function middleOfList(list){
+function middleOfList(list) {
   let currNode = list.head;
   //let previousNode = list.head;
   let count = 0;
-  let half = (size(list) / 2);
-  if(half % 2 !== 0){
+  let half = size(list) / 2;
+  if (half % 2 !== 0) {
     return console.log('No middle');
-  }
-  else {
-    while(currNode !== undefined){
-      if(count + 1 === half){
+  } else {
+    while (currNode !== undefined) {
+      if (count + 1 === half) {
         return console.log(currNode.value);
       }
       currNode = currNode.next;
       count++;
     }
   }
-
 }
-
 
 // Q8. Cycle Node
 
-function cycle(list){
+function cycle(list) {
   let currNode = list.head;
   let otherNode = list.head;
 
-  while(currNode.next !== undefined && currNode.next.next !== undefined){
+  while (currNode.next !== undefined && currNode.next.next !== undefined) {
     otherNode = otherNode.next; // 1st time is "Bobby"
     currNode = currNode.next.next; // 1st time is "Carlos"
 
-    if(currNode.value === otherNode.value){
-      return console.log('CYCLE IS TRUE')
+    if (currNode.value === otherNode.value) {
+      return console.log('CYCLE IS TRUE');
     }
   }
 
-  return console.log('NO CYCLE FOUND')
-
+  return console.log('NO CYCLE FOUND');
 }
 
-function main(){
+function main() {
   let SLL = new LinkedList();
   SLL.insertFirst('Apollo');
   SLL.insert('Boomer');
@@ -292,23 +281,21 @@ function main(){
   // middleOfList(SLL);
 
   let Cycle = new LinkedList();
-  Cycle.insertFirst('Albert')
-  Cycle.insert('Bobby')
-  Cycle.insert('Carlos')
-  Cycle.insert('Daniel')
-  Cycle.insert('EJ')
-  console.log(display(Cycle))
-  cycle(Cycle)
-
+  Cycle.insertFirst('Albert');
+  Cycle.insert('Bobby');
+  Cycle.insert('Carlos');
+  Cycle.insert('Daniel');
+  Cycle.insert('EJ');
+  console.log(display(Cycle));
+  cycle(Cycle);
 }
 //console.log(JSON.stringify(main()));
 main();
 
-
 // Q4. Mystery Program
 
-// Time Complexity: O(n) --> The first while just checks to make sure the list is not 
+// Time Complexity: O(n) --> The first while just checks to make sure the list is not
 // empty but the second while checks for the values and isnt dependent on the first
 // while loop (newNode.next)
 
- module.exports = {LinkedList, Node}
+module.exports = LinkedList;

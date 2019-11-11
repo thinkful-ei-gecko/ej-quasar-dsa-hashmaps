@@ -1,36 +1,66 @@
 'use strict';
 const HashMap = require('./hashmap');
+const customHashMap = require('./hashmapchain');
 
 function main() {
   const Ior = new HashMap();
   HashMap.MAX_LOAD_RATIO = 0.5;
   HashMap.SIZE_RATIO = 3;
 
-  Ior.set('Hobbit', 'Bilbo');
-  Ior.set('Hobbit', 'Frodo');
-  Ior.set('Wizard', 'Gandalf');
-  Ior.set('Human', 'Aragorn');
-  Ior.set('Elf', 'Legolas');
-  Ior.set('Maiar', 'The Necromancer');
-  Ior.set('Maiar', 'Sauron');
-  Ior.set('RingBearer', 'Gollum');
-  Ior.set('LadyOfLight', 'Galadriel');
-  Ior.set('HalfElven', 'Arwen');
-  Ior.set('Ent', 'Treebeard');
+  const IorB = new customHashMap();
+  customHashMap.MAX_LOAD_RATIO = 0.5;
+  customHashMap.SIZE_RATIO = 3;
 
-  console.log(Ior);
-  console.log(Ior.get('Hobbit'));
-  console.log(Ior.get('Maiar'));
+  // Ior.set('Hobbit', 'Bilbo');
+  // Ior.set('Hobbit', 'Frodo');
+  // Ior.set('Wizard', 'Gandalf');
+  // Ior.set('Human', 'Aragorn');
+  // Ior.set('Elf', 'Legolas');
+  // Ior.set('Maiar', 'The Necromancer');
+  // Ior.set('Maiar', 'Sauron');
+  // Ior.set('RingBearer', 'Gollum');
+  // Ior.set('LadyOfLight', 'Galadriel');
+  // Ior.set('HalfElven', 'Arwen');
+  // Ior.set('Ent', 'Treebeard');
+  //
+  IorB.set('Ent', 'Treebeard');
+  IorB.set('Ent', 'Ent 2');
+  IorB.set('Ent', 'ent 3');
+  IorB.set('Ent', 'ent 4');
+  IorB.set('Ent', 'ent 5');
+  IorB.set('Ent', 'ent 6');
 
-  const dupString = 'google all that you can think of';
-  console.log(removeDup(dupString));
+  IorB.set('Wizard', 'Gandalf');
+  IorB.set('Wizard', 'Sauron');
+  IorB.set('Human', 'Aragorn');
+  IorB.set('Human', 'Boromir');
+  IorB.set('Elf', 'Legolas');
+  IorB.set('Maiar', 'The Necromancer');
+  IorB.set('Maiar', 'Maiar 2');
+  IorB.set('Maiar', 'Sauron');
+  IorB.set('RingBearer', 'Gollum');
+  IorB.set('LadyOfLight', 'Galadriel');
+  IorB.set('HalfElven', 'Arwen');
+  IorB.set('HalfElven', 'Gsdff');
+  IorB.set('Hobbit', 'Bilbo');
+  IorB.set('Hobbit', 'Frodo');
+  IorB.set('Hobbit', 'Pippin');
+  IorB.set('Hobbit', 'Merry');
+
+  // console.log(Ior);
+  // console.log(Ior.get('Hobbit'));
+  // console.log(Ior.get('Maiar'));
+
+  // const dupString = 'google all that you can think of';
+  // console.log(removeDup(dupString));
 
   // input: as above
   // output: an array but with like hobbit
   // Key: hobbit, value: "Frodo", next: 'Bilbo' {
   //   value: bilbo, next: alex { }
   // }
-
+  console.log(IorB);
+  console.log(JSON.stringify(IorB));
 }
 
 const WhatDoesThisDo = function() {
@@ -71,87 +101,82 @@ const removeDup = function(string) {
 main();
 // WhatDoesThisDo();
 
-
 // Q5. Permutationn a Palinndrome
 
-function palindrome(string){
+function palindrome(string) {
   let map = new HashMap();
   let count = 0;
-  for (let i = 0; i < string.length; i++){
-    map.set(i, string[i])
+  for (let i = 0; i < string.length; i++) {
+    map.set(i, string[i]);
     count++;
   }
 
-  if (count % 2 === 0){
-
-    for (let i = 0; i < string.length; i++){
+  if (count % 2 === 0) {
+    for (let i = 0; i < string.length; i++) {
       let letterCounter = 0;
       // if it is odd will return false
-      let letter = map.get(i)
-        for(let j = 0; j < string.length; j++){
-          if(letter === map.get(j)){
-            letterCounter++
-          }
+      let letter = map.get(i);
+      for (let j = 0; j < string.length; j++) {
+        if (letter === map.get(j)) {
+          letterCounter++;
         }
+      }
 
-        if (letterCounter % 2 !== 0){
-          return false;
-        }
+      if (letterCounter % 2 !== 0) {
+        return false;
+      }
     }
-  
+
     return true;
   } else {
     let odd = 0;
-    for (let i = 0; i < string.length; i++){
+    for (let i = 0; i < string.length; i++) {
       let letterCounter = 0;
-      let letter = map.get(i)
+      let letter = map.get(i);
 
-      for (let j = 0; j < string.length; j++){
-        if(letter === map.get(j)){
-          letterCounter++
+      for (let j = 0; j < string.length; j++) {
+        if (letter === map.get(j)) {
+          letterCounter++;
         }
       }
 
-      if(letterCounter % 2 !== 0) {
-        odd++
+      if (letterCounter % 2 !== 0) {
+        odd++;
       }
     }
 
-    if (odd % 2 <= 1){
+    if (odd % 2 <= 1) {
       return true;
     } else {
       return false;
     }
-
   }
-
 }
 
-console.log(palindrome('pagoda'))
-
+// console.log(palindrome('pagoda'))
 
 // Q6. Anagram
 
-function Anagram(array){
-
+function Anagram(array) {
   const groups = new Map();
 
   array.forEach(wrd => {
-    const word = wrd.split('').sort().join('');
+    const word = wrd
+      .split('')
+      .sort()
+      .join('');
 
-    const group = groups.get(word) || []
+    const group = groups.get(word) || [];
 
-    groups.set(word, [...group, wrd])
+    groups.set(word, [...group, wrd]);
+  });
 
-  })
-
-  return Array.from(groups.values())
+  return Array.from(groups.values());
 }
 
-console.log(Anagram(
-  ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']
-  ))
-
+// console.log(Anagram(
+//   ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']
+//   ))
 
 // Q7. Hash Maps with Linked Lists
 
