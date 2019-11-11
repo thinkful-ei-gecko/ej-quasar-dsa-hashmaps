@@ -25,8 +25,9 @@ class customHashMap {
       this._resize(this._capacity * customHashMap.SIZE_RATIO);
     }
     // Find the slot where this key should be in
-    const slot = this._findSlot(key);
+    let slot = this._findSlot(key);
 
+    slot = {...slot, key, value, DELETED: false};
     //   if(this._hashTable[index] === )
     // console.log(`item ${key}, ${value} has index ${index}`);
     // if (!this._hashTable[index] );
@@ -51,9 +52,8 @@ class customHashMap {
     //     DELETED: false,
     //   };
 
-      // create linked list, or add to linked list
-      // if it already exists
-    }
+    // create linked list, or add to linked list
+    // if it already exists
   }
 
   delete(key) {
@@ -67,28 +67,32 @@ class customHashMap {
     this._deleted++;
   }
 
-// return slot
+  // return slot
   _findSlot(key) {
     const hash = customHashMap._hashString(key);
     const start = hash % this._capacity;
-    const slot = this._hashTable[start];
-    // if the slot doesn't exist, 
-    //
+    let slot = this._hashTable[start];
+    // if the slot doesn't exist,
+    // return the slot for object to be inserted into
+    // and increment length
     if (!slot) {
       this.length++;
-return this._hashTable[start] = {key};
-
-
-    }  if(slot.key === key ) return slot; 
+      return (this._hashTable[start] = {key});
+    }
+    // if the key is a match, then write over it
+    if (slot.key === key) return slot;
+    // if it isn't a match, search for it in the linked list
+    // if found, return the slot to be overridden
+    // if not, push onto the linked list
     while (slot.next) {
       slot = slot.next;
-      if(slot.key === key) return slot;
-    } 
-    return slot.next = {key};
+      if (slot.key === key) return slot;
+    }
+    return (slot.next = {key});
   }
 
   _resize(size) {
-    const oldSlots = this._t ashTable;
+    const oldSlots = this._hashTable;
     this._capacity = size;
     // Reset the length - it will get rebuilt as you add the items back
     this.length = 0;
