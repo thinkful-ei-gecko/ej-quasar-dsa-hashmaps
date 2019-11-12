@@ -1,6 +1,7 @@
 'use strict';
 const HashMap = require('./hashmap');
 const customHashMap = require('./hashmapchain');
+const NewHashMap = require('./hashmap-seqchain');
 
 function main() {
   const Ior = new HashMap();
@@ -10,6 +11,10 @@ function main() {
   const IorB = new customHashMap();
   customHashMap.MAX_LOAD_RATIO = 0.5;
   customHashMap.SIZE_RATIO = 3;
+
+  const IorC = new NewHashMap();
+  NewHashMap.MAX_LOAD_RATIO = 0.5;
+  NewHashMap.SIZE_RATIO = 3;
 
   // Ior.set('Hobbit', 'Bilbo');
   // Ior.set('Hobbit', 'Frodo');
@@ -22,8 +27,8 @@ function main() {
   // Ior.set('LadyOfLight', 'Galadriel');
   // Ior.set('HalfElven', 'Arwen');
   // Ior.set('Ent', 'Treebeard');
-  //
-  IorB.set('Ent', 'Treebeard');
+
+  /* IorB.set('Ent', 'Treebeard');
   IorB.set('Ent', 'Ent 2');
   IorB.set('Ent', 'ent 3');
   IorB.set('Ent', 'ent 4');
@@ -32,20 +37,48 @@ function main() {
 
   IorB.set('Wizard', 'Gandalf');
   IorB.set('Wizard', 'Sauron');
+
   IorB.set('Human', 'Aragorn');
   IorB.set('Human', 'Boromir');
+
   IorB.set('Elf', 'Legolas');
+
   IorB.set('Maiar', 'The Necromancer');
   IorB.set('Maiar', 'Maiar 2');
   IorB.set('Maiar', 'Sauron');
+
   IorB.set('RingBearer', 'Gollum');
+
   IorB.set('LadyOfLight', 'Galadriel');
+
   IorB.set('HalfElven', 'Arwen');
   IorB.set('HalfElven', 'Gsdff');
+
   IorB.set('Hobbit', 'Bilbo');
   IorB.set('Hobbit', 'Frodo');
   IorB.set('Hobbit', 'Pippin');
-  IorB.set('Hobbit', 'Merry');
+  IorB.set('Hobbit', 'Merry'); */
+
+  let names = [
+    { Hobbit: 'Bilbo' },
+    { Hobbit: 'Frodo' },
+    { Wizard: 'Gandolf' },
+    { Human: 'Aragon' },
+    { Elf: 'Legolas' },
+    { Maiar: 'The Necromancer' },
+    { Maiar: 'Sauron' },
+    { RingBearer: 'Gollum' },
+    { LadyOfLight: 'Galadriel' },
+    { HalfElven: 'Arwen' },
+    { ShepherdOfTheTrees: 'Treebeard' }
+  ];
+
+  for (let i = 0; i < names.length; ++i) {
+    for (let keys in names[i]) {
+      IorC.set(keys, names[i][keys]);
+    }
+  }
+  console.log(IorC);
 
   // console.log(Ior);
   // console.log(Ior.get('Hobbit'));
@@ -59,8 +92,9 @@ function main() {
   // Key: hobbit, value: "Frodo", next: 'Bilbo' {
   //   value: bilbo, next: alex { }
   // }
-  console.log(IorB);
-  console.log(JSON.stringify(IorB));
+  console.log(IorC);
+
+  // console.log(JSON.stringify(IorC));
 }
 
 const WhatDoesThisDo = function() {

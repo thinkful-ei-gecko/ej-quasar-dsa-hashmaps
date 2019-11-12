@@ -26,8 +26,10 @@ class customHashMap {
     }
     // Find the slot where this key should be in
     let slot = this._findSlot(key);
-
-    slot = {...slot, key, value, DELETED: false};
+    slot.key = key;
+    slot.value = value;
+    slot.DELETED = false;
+    // let newslot = { ...slot, key, value, DELETED: false};
     //   if(this._hashTable[index] === )
     // console.log(`item ${key}, ${value} has index ${index}`);
     // if (!this._hashTable[index] );
@@ -71,13 +73,14 @@ class customHashMap {
   _findSlot(key) {
     const hash = customHashMap._hashString(key);
     const start = hash % this._capacity;
+    console.log(`key '${key}' has index ${start}`);
     let slot = this._hashTable[start];
     // if the slot doesn't exist,
     // return the slot for object to be inserted into
     // and increment length
     if (!slot) {
       this.length++;
-      return (this._hashTable[start] = {key});
+      return (this._hashTable[start] = {key, next: null});
     }
     // if the key is a match, then write over it
     if (slot.key === key) return slot;
@@ -85,10 +88,10 @@ class customHashMap {
     // if found, return the slot to be overridden
     // if not, push onto the linked list
     while (slot.next) {
-      slot = slot.next;
       if (slot.key === key) return slot;
+      slot = slot.next;
     }
-    return (slot.next = {key});
+    return (slot = {key, next: null});
   }
 
   _resize(size) {
